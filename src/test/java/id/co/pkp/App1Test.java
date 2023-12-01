@@ -171,4 +171,24 @@ public class App1Test {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Get Current Url Test")
+    public void getCurrentUrlTest() {
+        Playwright playwright = Playwright.create();
+        BrowserContext browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false))
+                .newContext();
+        Page page = browser.newPage();
+
+        page.navigate("http://www.programsbuzz.com/user/login");
+        page.locator("#edit-name").type("Naruto");
+        page.locator("#edit-pass").type("uzumaki");
+
+        String currentUrl = page.url();
+        System.out.println(currentUrl);
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
