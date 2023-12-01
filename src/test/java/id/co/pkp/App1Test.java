@@ -191,4 +191,24 @@ public class App1Test {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Test Back And Forward")
+    public void testBackAndForward() {
+        Playwright playwright = Playwright.create();
+        BrowserContext browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false))
+                .newContext();
+        Page page = browser.newPage();
+
+        page.navigate("https://www.programsbuzz.com");
+        page.locator("#edit-submit--3").click();
+        page.locator("//input[@id='edit-keys']").type("Playwright");
+        page.locator("//input[@id='edit-submit']").click();
+        page.goBack();
+        page.goForward();
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
