@@ -211,4 +211,19 @@ public class App1Test {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Navigate URL")
+    public void navigateUrl() {
+        Playwright playwright = Playwright.create();
+        BrowserContext browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false))
+                .newContext();
+        Page page = browser.newPage();
+
+        page.navigate("http://autopract.com/selenium/upload1/");
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
