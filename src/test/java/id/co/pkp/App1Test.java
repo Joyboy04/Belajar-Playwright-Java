@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import java.awt.*;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : demo-playwright
@@ -241,6 +243,29 @@ public class App1Test {
         String textContent = page.locator("//p[normalize-space()='This is Sample Popup.']").textContent();
         System.out.println(textContent);
 
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Maximize Browser")
+    public void maximizeBrowser() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+
+//        browser.newContext(new Browser.NewContextOptions().setViewportSize(1800, 880));
+//
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        double width = screenSize.getWidth();
+//        double height = screenSize.getHeight();
+
+        int width2 = (int) screenSize.getWidth();
+        int height2 = (int) screenSize.getHeight();
+
+        BrowserContext newContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width2, height2));
+        Page page = browser.newPage();
+        page.navigate("https://www.google.co.id/");
         page.close();
         browser.close();
         playwright.close();
